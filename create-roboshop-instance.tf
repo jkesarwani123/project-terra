@@ -16,6 +16,14 @@ resource "aws_instance" "frontend" {
   }
 }
 
+resource "aws_route53_record" "frontend" {
+  zone_id = "Z0598390HIMZ28WHPBM2"
+  name    = "frontend.mushitude.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.frontend.private_ip]
+}
+
 output "frontend" {
  value=aws_instance.frontend.private_ip
 }
@@ -29,6 +37,14 @@ resource "aws_instance" "mongodb" {
   }
 }
 
+resource "aws_route53_record" "mongodb" {
+  zone_id = "Z0598390HIMZ28WHPBM2"
+  name    = "mongodb.mushitude.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.mongodb.private_ip]
+}
+
 resource "aws_instance" "catalogue" {
   ami           = data.aws_ami.centos.image_id
   instance_type = "t3.micro"
@@ -36,4 +52,12 @@ resource "aws_instance" "catalogue" {
   tags = {
     Name = "catalogue"
   }
+}
+
+resource "aws_route53_record" "catalogue" {
+  zone_id = "Z0598390HIMZ28WHPBM2"
+  name    = "catalogue.mushitude.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.catalogue.private_ip]
 }
