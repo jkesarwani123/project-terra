@@ -3,13 +3,16 @@ data "aws_ami" "centos" {
   most_recent      = true
   name_regex       = "Centos-8-DevOps-Practice"
 }
+variable "instanceTy" {
+  default = "t3.micro"
+}
 
 output "ami" {
 value=data.aws_ami.centos.image_id
 }
 resource "aws_instance" "frontend" {
   ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
+  instance_type = var.instanceTy
 
   tags = {
     Name = "frontend"
@@ -30,7 +33,7 @@ resource "aws_route53_record" "frontend" {
 
 resource "aws_instance" "mongodb" {
   ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
+  instance_type = var.instanceTy
 
   tags = {
     Name = "mongodb"
@@ -47,7 +50,7 @@ resource "aws_route53_record" "mongodb" {
 
 resource "aws_instance" "catalogue" {
   ami           = data.aws_ami.centos.image_id
-  instance_type = "t3.micro"
+  instance_type = var.instanceTy
 
   tags = {
     Name = "catalogue"
