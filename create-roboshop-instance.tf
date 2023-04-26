@@ -12,7 +12,7 @@ resource "aws_instance" "mongodb" {
   instance_type = "t3.micro"
 
   tags = {
-    Name = "HelloWorld"
+    Name = "mongodb"
   }
 }
 
@@ -21,6 +21,6 @@ resource "aws_instance" "catalogue" {
   instance_type = "t3.micro"
 
   tags = {
-    Name = "HelloWorld"
+    Name = "catalogue"
   }
 }
