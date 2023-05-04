@@ -86,7 +86,7 @@ resource "aws_route53_record" "records" {
   name    = "${each.value["name"]}.mushitude.online"
   type    = "A"
   ttl     = 30
-  records = [aws_instance[each.value["name"]].private_ip]
+  records = [aws_instance[each.value["name"]].instance.private_ip]
 }
 
 #resource "aws_instance" "frontend" {
