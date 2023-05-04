@@ -29,6 +29,10 @@ variable "components" {
       name="mongodb"
       instance_type = "t3.micro"
     }
+    catalogue={
+      name="catalogue"
+      instance_type = "t3.micro"
+    }
     redis={
       name="redis"
       instance_type = "t3.micro"
