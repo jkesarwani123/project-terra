@@ -1,5 +1,5 @@
- components= {
-  default ={
+ components = {
+
     frontend={
       name="frontend"
       instance_type = "t3.micro"
@@ -44,7 +44,7 @@
       name="dispatch"
       instance_type = "t3.micro"
     }
-  }
+
 }
 
  env = "dev"
