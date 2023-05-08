@@ -20,6 +20,24 @@ resource "aws_route53_record" "records" {
   records = [aws_instance.instance[each.value["name"]].private_ip]
 }
 
+resource "null_resource" "provisioner"{
+  for_each = var.components
+  provisioner "remote-exec" {
+  connection {
+    type     = "ssh"
+    user     = "centos"
+    password = "DevOps321"
+    host     = [aws_instance.instance[each.value["name"]].private_ip]
+  }
+
+    inline = [
+      "rm -rf Sample-Project",
+      "git clone https://github.com/jkesarwani123/Sample-Project.git",
+      "cd Sample-Project",
+      "sudo bash ${each.value["name"].sh" ]
+  }
+}
+
 #resource "aws_instance" "frontend" {
 #  ami           = data.aws_ami.centos.image_id
 #  instance_type = var.instanceTy
