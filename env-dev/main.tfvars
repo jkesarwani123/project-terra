@@ -42,6 +42,7 @@
     payment={
       name="payment"
       instance_type = "t3.micro"
+      password="roboshop123"
     }
     dispatch={
       name="dispatch"
