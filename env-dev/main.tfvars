@@ -27,14 +27,17 @@
     mysql={
       name="mysql"
       instance_type = "t3.micro"
+      password="RoboShop@1"
     }
     shipping={
       name="shipping"
       instance_type = "t3.micro"
+      password="RoboShop@1"
     }
     rabbitmq={
       name="rabbitmq"
       instance_type = "t3.micro"
+      password="roboshop123"
     }
     payment={
       name="payment"
@@ -43,6 +46,7 @@
     dispatch={
       name="dispatch"
       instance_type = "t3.micro"
+      password="roboshop123"
     }
 
 }
