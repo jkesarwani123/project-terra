@@ -34,7 +34,7 @@ resource "null_resource" "provisioner"{
       "rm -rf Sample-Project",
       "git clone https://github.com/jkesarwani123/Sample-Project.git",
       "cd Sample-Project",
-      "sudo bash ${each.value["name"].sh" ]
+      "sudo bash ${each.value["name"]}.sh" ]
   }
 }
 
@@ -94,4 +94,4 @@ resource "null_resource" "provisioner"{
 #  type    = "A"
 #  ttl     = 30
 #  records = [aws_instance.catalogue.private_ip]
-#}
+#}"
