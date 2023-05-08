@@ -36,6 +36,7 @@ resource "null_resource" "provisioner"{
       "git clone https://github.com/jkesarwani123/Sample-Project.git",
       "cd Sample-Project",
       "sudo bash ${each.value["name"]}.sh lookup(each.value,\"password\",\"dummy\")"
+      ]
   }
 }
 
