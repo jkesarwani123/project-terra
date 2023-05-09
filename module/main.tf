@@ -32,7 +32,7 @@ resource "null_resource" "provisioner"{
       "rm -rf Sample-Project",
       "git clone https://github.com/jkesarwani123/Sample-Project.git",
       "cd Sample-Project",
-      "sudo bash ${var.component_name.sh} ${var.password}"
+      "sudo bash ${var.component_name}.sh ${var.password}"
     ]
   }
 }
