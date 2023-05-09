@@ -14,7 +14,7 @@ resource "aws_route53_record" "records" {
   name    = "${var.component_name}.jkdevops.online"
   type    = "A"
   ttl     = 30
-  records = "aws_instance.instance.private_ip"
+  records = ["aws_instance.instance.private_ip"]
 }
 
 resource "null_resource" "provisioner"{
