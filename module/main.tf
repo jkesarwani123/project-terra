@@ -8,16 +8,9 @@ resource "aws_instance" "instance" {
   }
 }
 
-resource "aws_route53_record" "records" {
-  #for_each = var.components
-  zone_id = "Z08610883Q0OU1R5RFMYM"
-  name    = "${var.component_name}.jkdevops.online"
-  type    = "A"
-  ttl     = 30
-  records = [aws_instance.instance.private_ip]
-}
 
 resource "null_resource" "provisioner"{
+  count=var.provisioner? 1 : 0
   depends_on = [aws_instance.instance,aws_route53_record.records]
   #for_each = var.components
   provisioner "remote-exec" {
@@ -35,4 +28,14 @@ resource "null_resource" "provisioner"{
       "sudo bash ${var.component_name}.sh ${var.password}"
     ]
   }
+}
+
+
+resource "aws_route53_record" "records" {
+  #for_each = var.components
+  zone_id = "Z08610883Q0OU1R5RFMYM"
+  name    = "${var.component_name}.jkdevops.online"
+  type    = "A"
+  ttl     = 30
+  records = [aws_instance.instance.private_ip]
 }

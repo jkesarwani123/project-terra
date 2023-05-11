@@ -1,3 +1,5 @@
 variable "env"{}
-variable "components" {}
+variable "database" {}
+variable "app_servers" {}
+
 
