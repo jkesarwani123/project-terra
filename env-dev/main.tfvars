@@ -20,7 +20,6 @@ database={
 }
 
 app_servers= {
-
     frontend={
       name="frontend"
       instance_type = "t3.micro"
