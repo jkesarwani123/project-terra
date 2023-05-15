@@ -2,7 +2,7 @@ resource "aws_instance" "instance" {
   ami           = data.aws_ami.centos.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = [ data.aws_security_group.selected.id ]
-
+  iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
   tags = {
     Name = var.component_name
   }
@@ -58,6 +58,11 @@ resource "aws_iam_role" "role" {
   }
 }
 
+resource "aws_iam_instance_profile" "instance_profile" {
+  name = "${var.component_name}-${var.env}-role"
+  role = aws_iam_role.role.name
+}
+
 resource "aws_iam_role_policy" "ssm_roboshop_policy" {
   name = "${var.component_name}.${var.env}.role"
   role = aws_iam_role.role.id
@@ -76,8 +81,8 @@ resource "aws_iam_role_policy" "ssm_roboshop_policy" {
     "ssm:GetParameter"
   ],
     "Resource": [
-    "arn:aws:ssm:us-east-1:043742147815:document/dev.frontend.*",
-    "arn:aws:ssm:us-east-1:043742147815:parameter/dev.frontend.*"
+    "arn:aws:ssm:us-east-1:043742147815:document/${var.env}.${var.component_name}.*",
+    "arn:aws:ssm:us-east-1:043742147815:parameter/${var.env}.${var.component_name}.*"
   ]
   }
   ]
