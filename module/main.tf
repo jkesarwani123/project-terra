@@ -20,13 +20,7 @@ resource "null_resource" "provisioner"{
       password = "DevOps321"
       host     = aws_instance.instance.private_ip
     }
-
-    inline = [
-      "rm -rf Sample-Project",
-      "git clone https://github.com/jkesarwani123/Sample-Project.git",
-      "cd Sample-Project",
-      "sudo bash ${var.component_name}.sh ${var.password}"
-    ]
+    inline = var.app_type == "db" ? local.db_commands : local.app_commands
   }
 }
 
