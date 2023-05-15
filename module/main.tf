@@ -57,3 +57,29 @@ resource "aws_iam_role" "role" {
     tag-key = "${var.component_name}.${var.env}.role"
   }
 }
+
+resource "aws_iam_role_policy" "ssm_roboshop_policy" {
+  name = "${var.component_name}.${var.env}.role"
+  role = aws_iam_role.role.id
+  policy = jsonencode({
+
+    "Version": "2012-10-17",
+    "Statement": [
+  {
+    "Sid": "VisualEditor0",
+    "Effect": "Allow",
+    "Action": [
+    "ssm:GetParameterHistory",
+    "ssm:DescribeDocumentParameters",
+    "ssm:GetParametersByPath",
+    "ssm:GetParameters",
+    "ssm:GetParameter"
+  ],
+    "Resource": [
+    "arn:aws:ssm:us-east-1:043742147815:document/dev.frontend.*",
+    "arn:aws:ssm:us-east-1:043742147815:parameter/dev.frontend.*"
+  ]
+  }
+  ]
+   })
+}
