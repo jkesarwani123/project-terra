@@ -67,7 +67,7 @@ resource "aws_iam_role_policy" "ssm_roboshop_policy" {
   name = "${var.component_name}.${var.env}.role"
   role = aws_iam_role.role.id
   policy = jsonencode({
-  {
+
     "Version": "2012-10-17",
     "Statement": [
   {
@@ -112,6 +112,5 @@ resource "aws_iam_role_policy" "ssm_roboshop_policy" {
     "Resource": "*"
   }
   ]
-  },
   })
 }
