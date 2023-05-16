@@ -12,6 +12,9 @@ resource "aws_instance" "instance" {
 resource "null_resource" "provisioner"{
   count=var.provisioner? 1 : 0
   depends_on = [aws_instance.instance,aws_route53_record.records]
+  triggers = {
+    private_ip = aws_instance.instance.private_ip
+  }
   #for_each = var.components
   provisioner "remote-exec" {
     connection {
