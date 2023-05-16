@@ -15,7 +15,6 @@ resource "null_resource" "provisioner"{
   triggers = {
     private_ip = aws_instance.instance.private_ip
   }
-  #for_each = var.components
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
