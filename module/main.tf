@@ -84,7 +84,7 @@ resource "aws_iam_role_policy" "ssm_roboshop_policy" {
         ],
 #        "Resource": "*"
         "Resource": [
-          "arn:aws:ssm:us-east-1:043742147815:document/${var.env}.${var.component_name}.*",
+          "arn:aws:kms:us-east-1:043742147815:key/7a057889-68f1-4f4c-a3cb-4e0bfc8737c9",
           "arn:aws:ssm:us-east-1:043742147815:parameter/${var.env}.${var.component_name}.*"
         ]
       }
