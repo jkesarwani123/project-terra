@@ -67,77 +67,25 @@ resource "aws_iam_role_policy" "ssm_roboshop_policy" {
   name = "${var.component_name}.${var.env}.role"
   role = aws_iam_role.role.id
   policy = jsonencode({
-
-    "Version": "2012-10-17",
-    "Statement": [
-    {
-    "Effect": "Allow",
-    "Action": "iam:CreateServiceLinkedRole",
-    "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
-    "Condition": {
-    "StringLike": {
-    "iam:AWSServiceName": "ssm.amazonaws.com"
-  }
-  }
-  },
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
         "Sid": "VisualEditor0",
         "Effect": "Allow",
         "Action": [
-          "kms:GetParametersForImport",
           "kms:Decrypt",
-          "kms:ListAliases"
-        ],
-        "Resource": "*"
-      },
-      {
-        "Sid": "VisualEditor0",
-        "Effect": "Allow",
-        "Action": [
           "ssm:GetParameterHistory",
           "ssm:DescribeDocumentParameters",
           "ssm:GetParametersByPath",
           "ssm:GetParameters",
           "ssm:GetParameter"
         ],
-        "Resource": "*"
-#        "Resource": [
-#          "arn:aws:ssm:us-east-1:043742147815:document/dev.frontend.*",
-#          "arn:aws:ssm:us-east-1:043742147815:parameter/dev.frontend.*"
-#        ]
-      },
-      {
-        "Effect": "Allow",
-        "Action": [
-          "cloudwatch:PutMetricData",
-          "ds:CreateComputer",
-          "ds:DescribeDirectories",
-          "ec2:DescribeInstanceStatus",
-          "logs:*",
-          "ssm:*",
-          "ec2messages:*"
-        ],
-        "Resource": "*"
-      },
-      {
-        "Effect": "Allow",
-        "Action": [
-          "iam:DeleteServiceLinkedRole",
-          "iam:GetServiceLinkedRoleDeletionStatus"
-        ],
-        "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*"
-      },
-      {
-        "Effect": "Allow",
-        "Action": [
-          "ssmmessages:CreateControlChannel",
-          "ssmmessages:CreateDataChannel",
-          "ssmmessages:OpenControlChannel",
-          "ssmmessages:OpenDataChannel"
-        ],
-        "Resource": "*"
+#        "Resource": "*"
+        "Resource": [
+          "arn:aws:ssm:us-east-1:043742147815:document/${var.env}.${var.component_name}.*",
+          "arn:aws:ssm:us-east-1:043742147815:parameter/${var.env}.${var.component_name}.*"
+        ]
       }
-
     ]
   })
 }
