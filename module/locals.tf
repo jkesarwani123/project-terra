@@ -12,11 +12,11 @@ locals {
   ]
 
   db_tags = {
-    Name = "${var.component_name}"
+    Name = " ${var.component_name} "
   }
 
   app_tags ={
-    Name = "${var.component_name}"
+    Name = " ${var.component_name} "
     Monitor = "true"
   }
 }
