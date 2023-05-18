@@ -26,7 +26,6 @@ resource "null_resource" "provisioner"{
 
 
 resource "aws_route53_record" "records" {
-  #for_each = var.components
   zone_id = "Z08610883Q0OU1R5RFMYM"
   name    = "${var.component_name}.jkdevops.online"
   type    = "A"
@@ -37,8 +36,6 @@ resource "aws_route53_record" "records" {
 resource "aws_iam_role" "role" {
   name = "${var.component_name}.${var.env}.role"
 
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
