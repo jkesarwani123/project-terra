@@ -17,6 +17,6 @@ locals {
 
   app_tags ={
     Name = " ${var.component_name} "
-    Monitor = " true "
+    Monitor = "true "
   }
 }

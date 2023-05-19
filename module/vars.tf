@@ -6,3 +6,6 @@ variable "provisioner" {
   default = false
 }
 variable "app_type" {}
+variable "Monitor" {
+  default= "false"
+}
